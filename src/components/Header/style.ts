@@ -9,7 +9,7 @@ export const style = StyleSheet.create({
     headerText:{
         color:"#F2F2F2",
         textAlign:"center",
-        fontFamily:"inter",
+        fontFamily:"Inter",
         fontSize: 18,
         fontWeight:"bold",
         margin:"auto"
