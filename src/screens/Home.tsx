@@ -1,6 +1,8 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Header from "../components/Header";
 import { useState } from "react";
+import Feather from '@expo/vector-icons/Feather';
+import ListLayout from "../components/ListLayout";
 
 export function Home() {
     const [products,setProducts] = useState<string[]>([]);
@@ -12,7 +14,7 @@ export function Home() {
             <View style={styles.containerInput}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Nome do Produto"
+                    placeholder="Adicione uma nova produto"
                     placeholderTextColor='#BDBABA'
                     keyboardType="default"
                     onChangeText={setProductName}
@@ -21,11 +23,13 @@ export function Home() {
                 <TouchableOpacity
                     style={styles.inputButton}
                     >
-                    <Text style={styles.textButton}>
-                        +
-                    </Text>
+                    <Feather style={styles.textButton} name="plus-circle" size={24} color="black" />
                 </TouchableOpacity>
+            </View>
+            <View>
+                <ListLayout >
 
+                </ListLayout>
             </View>
 
         </View>
@@ -45,13 +49,14 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderStyle: "solid",
         backgroundColor: "#F2F2F2",
-        width:"100%"
+        width:"90%"
     },
     inputButton: {
         borderRadius: 6,
         backgroundColor: "#31C667",
         height:52,
-        width: 52
+        width: 52,
+        marginLeft:4
     },
     textButton:{
         margin:"auto",
@@ -63,6 +68,9 @@ const styles = StyleSheet.create({
         height: 54,
         paddingLeft: 24,
         paddingRight: 24,
+        position: "absolute",
+        top:145
+        
     }
 })
 
