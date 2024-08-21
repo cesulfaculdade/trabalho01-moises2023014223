@@ -1,4 +1,5 @@
-import { Text } from "react-native";
+import { Text, View } from "react-native";
+import { style } from "./style"
 
 type Props = {
     color: string;
@@ -6,16 +7,28 @@ type Props = {
     numeros: number
 }
 
-export default function ListLayout({color,name,numeros}:Props){
+export default function ListLayout({ color, name, numeros }: Props) {
     return (
-    <>
-       <Text style={{color:color}}>
-         (${name})
-       </Text>
-        <Text>
-            (${numeros})
-        </Text>
-    </>
-       
+        <View style={{ flexDirection: "row", height: 19 }} >
+            <Text style={{ color: color, fontWeight: "bold" }}>
+                {name}
+            </Text>
+            <View style={{
+                backgroundColor: "#D9D9D9",
+                borderCurve:"circular",
+                borderRadius:30,
+                marginLeft: 10,
+                height: 19,
+                width: 25,
+                display:"flex",
+                flexDirection:"column",
+                alignItems:"center",
+            }}>
+                <Text style={{ }}>
+                    {numeros}
+                </Text>
+            </View>
+        </View>
+
     )
-   }
+}
