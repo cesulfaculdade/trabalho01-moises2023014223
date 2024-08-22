@@ -18,7 +18,8 @@ export const style = StyleSheet.create({
         marginRight:"10%",
         width:"90%",
         justifyContent:"space-between",
-        padding:12
+        padding:12,
+        marginBottom:8
     },
     text:{
         color:"#262626",
