@@ -1,18 +1,18 @@
 import { Text, View } from "react-native";
 import {style} from "./style"
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import Entypo from '@expo/vector-icons/Entypo';
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 
 type Props = {
     name: string;
-    removeItem: ()=>void;
-    // finalizedItem :()=>void;
+    removeItem: ()=>void
 }
 
 export default function ListLayout({  name, removeItem}: Props) {
     return (
         <View style={style.container} >
-            <Entypo name="circle" size={24} color="#31C667"  />
+            <AntDesign name="checkcircle" size={24} color="#7A4A9E" />
             <Text style={style.text}>
                 {name}
             </Text>

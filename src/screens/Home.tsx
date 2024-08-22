@@ -4,6 +4,7 @@ import { useState } from "react";
 import Feather from '@expo/vector-icons/Feather';
 import ListLayout from "../components/ListLayout";
 import Product from "../components/Product";
+import ProductFinalized from "../components/ProductFinalized";
 import DefaultImage from '../images/shopping_list.png';
 
 const EMPTYLIST_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -11,30 +12,33 @@ const EMPTYLIST_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
 export function Home() {
     const [products, setProducts] = useState<string[]>([]);
     const [productName, setProductName] = useState("");
+    const [productConcluid, setProductConcluid] = useState<string[]>([]);
+
 
     function handleProductAdd() {
-        if(products.includes(productName)){
-          return Alert.alert("Produto já cadastrado","Já existe um produto na lista com este nome")  
+        if (products.includes(productName)) {
+            return Alert.alert("Produto já cadastrado", "Já existe um produto na lista com este nome")
         }
-        setProducts((prevState)=>[...prevState,productName]);
+        setProducts((prevState) => [...prevState, productName]);
         setProductName('');
-        
+
     }
 
+
     function handleProductRemove(name: string) {
-        Alert.alert("Remover",`Deseja remover o produto ${name}`,[{
-            text:"Sim",
-            onPress: ()=>{
-                setProducts((prevState)=>prevState.filter(product => product != name));
-                
+        Alert.alert("Remover", `Deseja remover o produto ${name}`, [{
+            text: "Sim",
+            onPress: () => {
+                setProducts((prevState) => prevState.filter(product => product != name));
+
             }
         },
         {
             text: "Não",
-            style:"cancel"
+            style: "cancel"
         }
-    
-    ])
+
+        ])
     }
     return (
 
@@ -73,28 +77,27 @@ export function Home() {
                 data={products}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Product name={item} removeItem={()=>{handleProductRemove(item)}}/>
+                    <Product name={item} removeItem={() => { handleProductRemove(item) }} />
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={products.length <= 0 && styles.list}
-                ListEmptyComponent={()=>(
-                
-                    
-                    
+                ListEmptyComponent={() => (
+
+                  
                     <View style={styles.containerEmptyList}>
                         <Image
-                        style={styles.tinyImage}
-                        source={{uri: EMPTYLIST_IMAGE}}
+                            style={styles.tinyImage}
+                            source={{ uri: EMPTYLIST_IMAGE }}
                         />
                         <Text style={styles.textEmptyBold}>
-                        Você ainda não tem produtos na lista de compra
+                            Você ainda não tem produtos na lista de compra
                         </Text>
                         <Text>
-                        Adicione produtos e organize sua lista de compras
+                            Adicione produtos e organize sua lista de compras
                         </Text>
                     </View>
-                ) }
-                
+                )}
+
             />
 
         </View>
@@ -143,38 +146,38 @@ const styles = StyleSheet.create({
         marginLeft: "10%",
         marginRight: "10%",
         width: "80%",
-        marginBottom:20
+        marginBottom: 20
     },
-    emptyText:{
-        backgroundColor:"red"
+    emptyText: {
+        backgroundColor: "red"
     },
     tinyImage: {
         width: 56,
         height: 56,
     },
-    containerEmptyList:{
-        flex:1,
+    containerEmptyList: {
+        flex: 1,
         marginLeft: "5%",
         marginRight: "5%",
         width: "90%",
-        justifyContent:"center",
-        flexDirection:"column",
-        alignItems:"center",
-        gap:16,
-        alignSelf:"stretch",
-        borderTopColor:"#D9D9D9",
-        borderTopWidth:1,
-        paddingVertical:48,
-        paddingHorizontal:20
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 16,
+        alignSelf: "stretch",
+        borderTopColor: "#D9D9D9",
+        borderTopWidth: 1,
+        paddingVertical: 48,
+        paddingHorizontal: 20
     },
-    textEmptyBold:{
-        color:"#808080",
-        textAlign:"center",
-        fontSize:14,
-        fontWeight:"700",
+    textEmptyBold: {
+        color: "#808080",
+        textAlign: "center",
+        fontSize: 14,
+        fontWeight: "700",
 
     },
-    list:{
+    list: {
 
     }
 })
