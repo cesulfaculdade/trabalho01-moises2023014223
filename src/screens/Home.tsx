@@ -19,11 +19,29 @@ export function Home() {
         if (products.includes(productName)) {
             return Alert.alert("Produto já cadastrado", "Já existe um produto na lista com este nome")
         }
+        if( productName.length == 0){
+            return Alert.alert("Digite um produto valido!")
+        }
         setProducts((prevState) => [...prevState, productName]);
         setProductName('');
 
     }
 
+    function handleProductFinalized(name: string) {
+        Alert.alert("Finalizar", `Quer finalizar o item ${name} ?`, [{
+            text: "Sim",
+            onPress: () => {
+                setProductConcluid((prevState) => prevState.filter(product => product != name));
+
+            }
+        },
+        {
+            text: "Não",
+            style: "cancel"
+        }
+
+        ])
+    }
 
     function handleProductRemove(name: string) {
         Alert.alert("Remover", `Deseja remover o produto ${name}`, [{
