@@ -56,6 +56,12 @@ export function Home() {
                         style={styles.tinyImage}
                         source={{uri: EMPTYLIST_IMAGE}}
                         />
+                        <Text style={styles.textEmptyBold}>
+                        Você ainda não tem produtos na lista de compra
+                        </Text>
+                        <Text>
+                        Adicione produtos e organize sua lista de compras
+                        </Text>
                     </View>
                 ) }
                 
@@ -118,16 +124,29 @@ const styles = StyleSheet.create({
     },
     containerEmptyList:{
         flex:1,
-        marginLeft: "10%",
-        marginRight: "10%",
-        width: "80%",
+        marginLeft: "5%",
+        marginRight: "5%",
+        width: "90%",
         justifyContent:"center",
         flexDirection:"column",
         alignItems:"center",
         gap:16,
         alignSelf:"stretch",
         borderTopColor:"#D9D9D9",
-        borderTopWidth:1
+        borderTopWidth:1,
+        height:"100%",
+        paddingVertical:48,
+        paddingHorizontal:20
+    },
+    textEmptyBold:{
+        color:"#808080",
+        textAlign:"center",
+        fontSize:14,
+        fontWeight:"700",
+
+    },
+    list:{
+
     }
 })
 
