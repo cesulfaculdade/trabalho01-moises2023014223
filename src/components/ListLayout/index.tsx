@@ -13,17 +13,7 @@ export default function ListLayout({ color, name, numeros }: Props) {
             <Text style={{ color: color, fontWeight: "bold" }}>
                 {name}
             </Text>
-            <View style={{
-                backgroundColor: "#D9D9D9",
-                borderCurve:"circular",
-                borderRadius:30,
-                marginLeft: 10,
-                height: 19,
-                width: 25,
-                display:"flex",
-                flexDirection:"column",
-                alignItems:"center",
-            }}>
+            <View style={style.container}>
                 <Text style={{ }}>
                     {numeros}
                 </Text>
