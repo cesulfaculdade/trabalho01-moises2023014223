@@ -9,13 +9,21 @@ export const style = StyleSheet.create({
         paddingLeft:12,
         alignItems:"center",
         gap:8,
-        alignSelf:"stretch",
+        alignSelf:"center",
         borderRadius: 8,
         borderWidth:1,
         borderColor:"#808080",
+        flexDirection:"row",
+        marginLeft:"10%",
+        marginRight:"10%",
+        width:"90%",
+        justifyContent:"space-between",
+        padding:12
     },
     text:{
-        color:"#262626"
+        color:"#262626",
+        marginRight:"auto",
+        marginLeft:8
     }
 
 })

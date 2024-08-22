@@ -1,8 +1,9 @@
-import { FlatList, Image, ImageComponent, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Image, ImageComponent, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Header from "../components/Header";
 import { useState } from "react";
 import Feather from '@expo/vector-icons/Feather';
 import ListLayout from "../components/ListLayout";
+import Product from "../components/Product";
 import DefaultImage from '../images/shopping_list.png';
 
 const EMPTYLIST_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -10,6 +11,31 @@ const EMPTYLIST_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
 export function Home() {
     const [products, setProducts] = useState<string[]>([]);
     const [productName, setProductName] = useState("");
+
+    function handleProductAdd() {
+        if(products.includes(productName)){
+          return Alert.alert("Produto já cadastrado","Já existe um produto na lista com este nome")  
+        }
+        setProducts((prevState)=>[...prevState,productName]);
+        setProductName('');
+        
+    }
+
+    function handleProductRemove(name: string) {
+        Alert.alert("Remover",`Deseja remover o produto ${name}`,[{
+            text:"Sim",
+            onPress: ()=>{
+                setProducts((prevState)=>prevState.filter(product => product != name));
+                
+            }
+        },
+        {
+            text: "Não",
+            style:"cancel"
+        }
+    
+    ])
+    }
     return (
 
         <View style={styles.container}>
@@ -25,6 +51,7 @@ export function Home() {
                 />
                 <TouchableOpacity
                     style={styles.inputButton}
+                    onPress={handleProductAdd}
                 >
                     <Feather style={styles.textButton} name="plus-circle" size={24} color="black" />
                 </TouchableOpacity>
@@ -33,7 +60,7 @@ export function Home() {
                 <ListLayout
                     name={"Produtos"}
                     color="#31C667"
-                    numeros={0}
+                    numeros={products.length}
                 />
 
                 <ListLayout
@@ -46,11 +73,14 @@ export function Home() {
                 data={products}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Text>teste</Text>
+                    <Product name={item} removeItem={()=>{handleProductRemove(item)}}/>
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={products.length <= 0 && styles.list}
                 ListEmptyComponent={()=>(
+                
+                    
+                    
                     <View style={styles.containerEmptyList}>
                         <Image
                         style={styles.tinyImage}
