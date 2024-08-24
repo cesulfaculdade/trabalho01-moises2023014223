@@ -6,13 +6,13 @@ import Entypo from '@expo/vector-icons/Entypo';
 type Props = {
     name: string;
     removeItem: ()=>void;
-    // finalizedItem :()=>void;
+    finalized :()=>void;
 }
 
-export default function ListLayout({  name, removeItem}: Props) {
+export default function ListLayout({  name, removeItem,finalized}: Props) {
     return (
         <View style={style.container} >
-            <Entypo name="circle" size={24} color="#31C667"  />
+            <Entypo name="circle" size={24} color="#31C667" onPress={finalized} />
             <Text style={style.text}>
                 {name}
             </Text>

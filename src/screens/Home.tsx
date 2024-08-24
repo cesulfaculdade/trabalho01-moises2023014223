@@ -27,12 +27,25 @@ export function Home() {
 
     }
 
-    function handleProductFinalized(name: string) {
+    function handleProductFinalized(name:string){
         Alert.alert("Finalizar", `Quer finalizar o item ${name} ?`, [{
             text: "Sim",
             onPress: () => {
-                setProductConcluid((prevState) => prevState.filter(product => product != name));
+                setProductConcluid((prevState) => [...prevState, name]);
+            }
+        },
+        {
+            text: "Não",
+            style: "cancel"
+        }])
+    }
 
+    function handleRemoveProductFinalized(name: string) {
+        Alert.alert("Apagar", `Quer Apagar o  ${name} ?`, [{
+            text: "Sim",
+            onPress: () => {
+                setProductConcluid((prevState) => prevState.filter(product => product != name));
+                setProducts((prevState) => prevState.filter(product => product != name))
             }
         },
         {
@@ -88,14 +101,26 @@ export function Home() {
                 <ListLayout
                     name={"Finalizados"}
                     color="#7A4A9E"
-                    numeros={0}
+                    numeros={productConcluid.length}
                 />
             </View>
             <FlatList
                 data={products}
                 keyExtractor={item => item}
                 renderItem={({ item }) => (
-                    <Product name={item} removeItem={() => { handleProductRemove(item) }} />
+                    productConcluid.includes(item) ? (
+                        <ProductFinalized 
+                            name={item} 
+                            removeItem={() =>handleRemoveProductFinalized(item)}
+                         
+                        />
+                    ) : (
+                        <Product 
+                            name={item} 
+                            removeItem={() => handleProductRemove(item)} 
+                            finalized={()=> handleProductFinalized(item)}
+                        />
+                    )
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={products.length <= 0 && styles.list}
